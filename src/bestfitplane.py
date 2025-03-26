@@ -22,9 +22,9 @@ z = np.array(z)
 # Plot the initial data
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-#ax.scatter(x, y, z, label='Data')  # Plot the original data points
+ax.scatter(x, y, z, label='Data',color='black')  # Plot the original data points
 ax.scatter(B_X,B_Y,B_Z,label="B",color='g')
-ax.scatter(C_X,C_Y,C_Z,label="C",color='b')
+ax.scatter(C_X,C_Y,C_Z,label="C",color='y')
 ax.scatter(F_X,F_Y,F_Z,label="F",color='r')
 ax.scatter(E_X,E_Y,E_Z,label="E",color='m')
 
