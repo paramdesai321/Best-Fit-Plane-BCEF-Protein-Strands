@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 #from parsingcoord import Parsing
 from CA_C_N_parsing import x_coord,y_coord,z_coord
 import time
-from Strands import B_X,B_Y,B_Z,C_X,C_Y,C_Z,E_X,E_Y,E_Z,F_X,F_Y,F_Z
+from Strands import B_X,B_Y,B_Z,C_X,C_Y,C_Z,E_X,E_Y,E_Z,F_X,F_Y,F_Z,rest_X,rest_Y,rest_Z
 
 # Retrieve the coordinates
 st= time.time()
@@ -22,7 +22,7 @@ z = np.array(z)
 # Plot the initial data
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.scatter(x, y, z, label='Data',color='black')  # Plot the original data points
+ax.scatter(rest_X, rest_Y, rest_Z, label='Data',color='black')  # Plot the original data points
 ax.scatter(B_X,B_Y,B_Z,label="B",color='g')
 ax.scatter(C_X,C_Y,C_Z,label="C",color='y')
 ax.scatter(F_X,F_Y,F_Z,label="F",color='r')

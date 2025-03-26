@@ -13,7 +13,9 @@ E_Z = []
 F_X = []
 F_Y=[]
 F_Z=[]
-
+rest_X = []
+rest_Y = []
+rest_Z= []
 
 with open('ParsedAtoms.txt','r') as rf:
 
@@ -26,8 +28,10 @@ with open('ParsedAtoms.txt','r') as rf:
             coordinates.striping_coords(line,E_X,E_Y,E_Z)
         if(line[21].strip()=='F'):
             coordinates.striping_coords(line,F_X,F_Y,F_Z)
+        if(line[21].strip() != 'B' or line[21].strip() != 'C' or line[21].strip() != 'E' or line[21].strip() != 'F'):
+            coordinates.striping_coords(line,rest_X,rest_Y,rest_Z)
 
 
 
-    print(C_X)
+    print(rest_X)
 
