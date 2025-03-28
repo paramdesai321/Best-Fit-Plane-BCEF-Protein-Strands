@@ -14,7 +14,7 @@ def striping_coords(line,x_coord,y_coord,z_coord):
 		z_coord.append(z)
 		coords.append((x, y, z))
 
-with open(f'./ATOMlines1CD8.txt', 'r') as rf:
+with open(f'./ATOMlines2iij.txt', 'r') as rf:
 	with open(f'xyz.txt','w') as wf:
 
 		for line in rf:

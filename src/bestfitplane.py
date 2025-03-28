@@ -22,11 +22,11 @@ z = np.array(z)
 # Plot the initial data
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.scatter(rest_X, rest_Y, rest_Z, label='Data',color='black')  # Plot the original data points
+ax.scatter(rest_X, rest_Y, rest_Z, label='Data',color='m')  # Plot the original data points
 ax.scatter(B_X,B_Y,B_Z,label="B",color='g')
-ax.scatter(C_X,C_Y,C_Z,label="C",color='y')
-ax.scatter(F_X,F_Y,F_Z,label="F",color='r')
-ax.scatter(E_X,E_Y,E_Z,label="E",color='m')
+ax.scatter(C_X,C_Y,C_Z,label="C",color='g')
+ax.scatter(F_X,F_Y,F_Z,label="F",color='g')
+ax.scatter(E_X,E_Y,E_Z,label="E",color='g')
 
 #w1 = np.random.rand(1)
 #w2 = np.random.rand(1)
@@ -81,12 +81,50 @@ for i in range(400):
     w2 -= k * w2_grad
     b -= k * b_grad
 
+def plot_perpendicular_plane(ax, x, y, z_pred, w1, w2, b):
+    # Step 1: Point on original plane
+    point_on_plane = np.array([np.mean(x), np.mean(y), np.mean(z_pred)])
+
+    # Step 2: Original normal vector
+    n = np.array([w1[0], w2[0], -1])
+
+    # Step 3: Choose a perpendicular normal vector
+    a, b_val = 1, 0
+    c = w1[0]
+    n_perp = np.array([a, b_val, c])
+
+    # Step 4: Create a grid of x and z values
+    x_range = np.linspace(min(x), max(x), 20)
+    z_range = np.linspace(min(z_pred), max(z_pred), 20)
+    X, Z = np.meshgrid(x_range, z_range)
+
+    # Avoid divide-by-zero: if n_perp[1] == 0, pick different values
+    if n_perp[1] == 0:
+        a, b_val = 0, 1
+        c = w2[0]
+        n_perp = np.array([a, b_val, c])
+
+    # Step 5: Solve for Y using the plane equation
+    Y = ((-n_perp[0]*(X - point_on_plane[0]) - n_perp[2]*(Z - point_on_plane[2])) / n_perp[1]) + point_on_plane[1]
+
+    # Step 6: Plot the perpendicular plane
+    ax.plot_surface(X, Y, Z, alpha=0.5, color='blue')
 
 # Final prediction
 z_pred = f(x, y, w1, w2, b)
+print(f"w1: {w1}")
 
+print(f"w2: {w2}")
+print(f"b: {b}")
+z_pred = np.array(z_pred)
+print(f"z_pred: {z_pred[:3]}")
+
+print(f"x: {x[:3]}")
+print(f"Y: {y[:3]}")
 
 # Plot the final results
+
+plot_perpendicular_plane(ax, x, y, z_pred, w1, w2, b)
 ax.plot_trisurf(x, y,z_pred, color='red', alpha=0.5)
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
@@ -107,7 +145,12 @@ above_plane = np.sum(z > z_pred)
 below_plane = np.sum(z < z_pred)
 print(f"Points above the Plane: {(above_plane/400)*100}")
 print(f"Points below the Plane: {(below_plane/400)*100}" )
-
+print(min(x))
+print(min(y))
+print(min(z_pred))
 #print(z_pred)
+print("----------------")
+print(max(x))
+print(max(y))
+print(max(z_pred))
 
-    

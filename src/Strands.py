@@ -34,4 +34,6 @@ with open('ParsedAtoms.txt','r') as rf:
 
 
     print(rest_X)
-
+    print(len(rest_X))
+    print(len(B_X))
+    print(B_X)

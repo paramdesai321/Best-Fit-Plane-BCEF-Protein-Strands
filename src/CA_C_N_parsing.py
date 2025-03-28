@@ -10,9 +10,9 @@ def DesiredAtoms(line):
             print(line)
             return True
 
-with open(f'ParsedAtoms1CD8.txt','w') as wf:
+with open(f'ATOMlines2iij.txt','w') as wf:
 
-    with open(f'./ATOMlines1CD8.txt', 'r') as rf:
+    with open(f'./ATOMlines2iij_BCEF.txt', 'r') as rf:
 
         for line in rf:
 
